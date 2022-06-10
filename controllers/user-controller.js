@@ -5,6 +5,17 @@ const userController = {
 // get all users
   getAllUser(req, res) {
     User.find({})
+  // populate user's thoughts
+    .populate({
+      path: 'thoughts',
+      select: '-__v'
+    })
+  // populate user's friends
+    .populate({
+      path: 'friends',
+      select: '-__v'
+     })
+      .select('-__v')
       .then(dbUserData => res.json(dbUserData))
         .catch(err => {
           console.log(err);
@@ -14,6 +25,17 @@ const userController = {
 // get one user by Id
   getUserById({ params }, res) {
     User.findOne({_id: params.id })
+  // populate user's thoughts
+    .populate({
+      path: 'thoughts',
+      select: '-__v'
+    })
+  // populate user's friends
+    .populate({
+      path: 'friends',
+      select: '-__v'
+    })
+      .select('-__v')
       .then(dbUserData => {
         // If no user is found, send 404
         if (!dbUserData) {

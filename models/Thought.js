@@ -61,10 +61,10 @@ const ThoughtSchema = (
     id: false
   }
 );
-// virtual 'reactionCount' that retrieves the length of the thought's reactions array
+ // virtual 'reactionCount' that retrieves the length of the thought's reactions array
 ThoughtSchema.virtual('reactionCount').get(function() {
     return this.reactions.length;
-});
+}); 
 
 // create the thought model using the ThoughtSchema
 const Thought = model('Thought', ThoughtSchema);
