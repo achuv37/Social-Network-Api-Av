@@ -2,7 +2,7 @@ const {Schema, model, Types} = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
 //ReactionSchema
-const ReactionSchema = (
+const ReactionSchema = new Schema(
   {
   // set custom id to avoid confusion with parent thought's id field
     reactionId: {
@@ -32,7 +32,7 @@ const ReactionSchema = (
   }
 );
 // creating thoughtSchema
-const ThoughtSchema = (
+const ThoughtSchema = new Schema(
   {
     thoughtText: {
       type: String,
@@ -61,10 +61,12 @@ const ThoughtSchema = (
     id: false
   }
 );
+
  // virtual 'reactionCount' that retrieves the length of the thought's reactions array
 ThoughtSchema.virtual('reactionCount').get(function() {
     return this.reactions.length;
 }); 
+
 
 // create the thought model using the ThoughtSchema
 const Thought = model('Thought', ThoughtSchema);
